@@ -3,13 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29613.14
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TWD.Core.DataTypes", "TWD.Core.DataTypes\TWD.Core.DataTypes.csproj", "{D0362C38-88F5-4F51-8862-4CCF242AD2C6}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TWD.Core.Services", "TWD.Core.Services\TWD.Core.Services.csproj", "{6C81DD13-7F63-4704-A052-03320B8F76EE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TWD.Core.DataTypes", "TWD.Core.DataTypes\TWD.Core.DataTypes.csproj", "{D0362C38-88F5-4F51-8862-4CCF242AD2C6}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{2CF5085A-43F5-4AA9-9340-B50ABD8C14AF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TWD.Core.DataTypes.Tests", "TWD.Core.DataTypes.Tests\TWD.Core.DataTypes.Tests.csproj", "{12CF7EE8-1117-4E00-AA5F-9E8529CD41A0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TWD.Core.DataTypes.Tests", "TWD.Core.DataTypes.Tests\TWD.Core.DataTypes.Tests.csproj", "{12CF7EE8-1117-4E00-AA5F-9E8529CD41A0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,14 +19,6 @@ Global
 		{D0362C38-88F5-4F51-8862-4CCF242AD2C6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D0362C38-88F5-4F51-8862-4CCF242AD2C6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D0362C38-88F5-4F51-8862-4CCF242AD2C6}.Release|Any CPU.Build.0 = Release|Any CPU
-		{6C81DD13-7F63-4704-A052-03320B8F76EE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{6C81DD13-7F63-4704-A052-03320B8F76EE}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{6C81DD13-7F63-4704-A052-03320B8F76EE}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{6C81DD13-7F63-4704-A052-03320B8F76EE}.Release|Any CPU.Build.0 = Release|Any CPU
-		{B4324CF9-2282-44AD-8EFA-C54F2A3C3F1B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{B4324CF9-2282-44AD-8EFA-C54F2A3C3F1B}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{B4324CF9-2282-44AD-8EFA-C54F2A3C3F1B}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{B4324CF9-2282-44AD-8EFA-C54F2A3C3F1B}.Release|Any CPU.Build.0 = Release|Any CPU
 		{12CF7EE8-1117-4E00-AA5F-9E8529CD41A0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{12CF7EE8-1117-4E00-AA5F-9E8529CD41A0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{12CF7EE8-1117-4E00-AA5F-9E8529CD41A0}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -38,7 +28,6 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{B4324CF9-2282-44AD-8EFA-C54F2A3C3F1B} = {2CF5085A-43F5-4AA9-9340-B50ABD8C14AF}
 		{12CF7EE8-1117-4E00-AA5F-9E8529CD41A0} = {2CF5085A-43F5-4AA9-9340-B50ABD8C14AF}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
