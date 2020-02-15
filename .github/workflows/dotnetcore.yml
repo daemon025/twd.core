@@ -1,4 +1,4 @@
-name: CI
+name: Build & Test
 
 on: [push]
 
@@ -16,4 +16,4 @@ jobs:
     - name: Build
       run: dotnet build TWD.Core/TWD.Core.sln --configuration Release
     - name: Test
-      run: dotnet test
+      run: dotnet test TWD.Core/*
