@@ -9,7 +9,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TWD.Core.Services", "TWD.Co
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{2CF5085A-43F5-4AA9-9340-B50ABD8C14AF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TWD.Core.DataTypes.Tests", "TWD.Core.DataTypes.Tests\TWD.Core.DataTypes.Tests.csproj", "{B4324CF9-2282-44AD-8EFA-C54F2A3C3F1B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TWD.Core.DataTypes.Tests", "TWD.Core.DataTypes.Tests\TWD.Core.DataTypes.Tests.csproj", "{12CF7EE8-1117-4E00-AA5F-9E8529CD41A0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -29,12 +29,17 @@ Global
 		{B4324CF9-2282-44AD-8EFA-C54F2A3C3F1B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B4324CF9-2282-44AD-8EFA-C54F2A3C3F1B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B4324CF9-2282-44AD-8EFA-C54F2A3C3F1B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{12CF7EE8-1117-4E00-AA5F-9E8529CD41A0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{12CF7EE8-1117-4E00-AA5F-9E8529CD41A0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{12CF7EE8-1117-4E00-AA5F-9E8529CD41A0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{12CF7EE8-1117-4E00-AA5F-9E8529CD41A0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{B4324CF9-2282-44AD-8EFA-C54F2A3C3F1B} = {2CF5085A-43F5-4AA9-9340-B50ABD8C14AF}
+		{12CF7EE8-1117-4E00-AA5F-9E8529CD41A0} = {2CF5085A-43F5-4AA9-9340-B50ABD8C14AF}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {D01E2609-698C-4BC5-9BF9-61C46F7D62F6}
