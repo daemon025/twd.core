@@ -1,11 +1,12 @@
 ﻿using System;
+using System.Linq;
 using EnsureThat;
 
 namespace TWD.Core.DataTypes
 {
-    public class Trait
+    public abstract class Trait
     {
-        public Trait(Guid id, string name)
+        protected Trait(Guid id, string name)
         {
             Id = Ensure.Guid.IsNotEmpty(id, nameof(id));
             Name = Ensure.String.IsNotNullOrWhiteSpace(name, nameof(name));
@@ -13,17 +14,11 @@ namespace TWD.Core.DataTypes
 
         public Guid Id { get; }
         public string Name { get; }
+        public abstract Guid[] SupportedClasses { get; }
 
-        // TODO: make abstract later
-        public string GetDescription(int level)
-        {
-            return $"{level}";
-        }
+        public abstract string GetDescription(int level);
 
-        // TODO: make protected abstract supported classes
-        public bool BelongsToClass(Guid classId)
-        {
-            return true;
-        }
+        public bool BelongsToClass(Guid classId) =>
+            SupportedClasses.Contains(classId);
     }
 }
