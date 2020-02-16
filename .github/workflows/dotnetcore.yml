@@ -1,4 +1,4 @@
-name: .NET Core
+name: Build & Test
 
 on: [push]
 
@@ -13,5 +13,7 @@ jobs:
       uses: actions/setup-dotnet@v1
       with:
         dotnet-version: '3.1.100' # SDK Version to use.
-    - name: Build with dotnet
+    - name: Build
       run: dotnet build TWD.Core/TWD.Core.sln --configuration Release
+    - name: Test
+      run: dotnet test TWD.Core/TWD.Core.DataTypes.Tests/TWD.Core.DataTypes.Tests.csproj
