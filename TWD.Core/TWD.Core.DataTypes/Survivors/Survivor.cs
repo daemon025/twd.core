@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using EnsureThat;
+using TWD.Core.DataTypes.Badges;
 using TWD.Core.DataTypes.Constants;
 
 namespace TWD.Core.DataTypes.Survivors
@@ -16,6 +17,7 @@ namespace TWD.Core.DataTypes.Survivors
             Level = Ensure.Comparable.IsInRange(level, 1, SurvivorConstants.MaxLevel, nameof(level));
             Rarity = rarity;
             _traits = new List<SurvivorTrait>();
+            Badges = new Badge[6];
         }
 
         public Guid Id { get; }
@@ -26,6 +28,8 @@ namespace TWD.Core.DataTypes.Survivors
 
         private readonly List<SurvivorTrait> _traits;
         public IReadOnlyList<SurvivorTrait> Traits => _traits.AsReadOnly();
+
+        public Badge[] Badges { get; }
 
         public Survivor AddTrait<T>(int level) where T : Trait, new()
         {
@@ -42,6 +46,21 @@ namespace TWD.Core.DataTypes.Survivors
             _traits.Add(new SurvivorTrait(trait, level));
 
             return this;
+        }
+
+
+        public void EquipBadge(int slot, Badge badge)
+        {
+            Ensure.Comparable.IsInRange(slot, 1, 6, nameof(slot));
+            Ensure.Any.IsNotNull(badge, nameof(badge));
+
+            Badges[slot] = badge;
+        }
+
+        public void UnEquipBadge(int slot)
+        {
+            Ensure.Comparable.IsInRange(slot, 1, 6, nameof(slot));
+            Badges[slot] = null;
         }
     }
 }
