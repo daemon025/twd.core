@@ -29,7 +29,7 @@ namespace TWD.Core.DataTypes.Tests
             _survivor.EquipBadge(badge2);
             _survivor.EquipBadge(badge3);
 
-            Assert.Throws<Exception>(() => _survivor.EquipBadge(badge4));
+            Assert.Throws<ArgumentException>(() => _survivor.EquipBadge(badge4));
         }
 
         [Test]
@@ -40,7 +40,7 @@ namespace TWD.Core.DataTypes.Tests
 
             _survivor.EquipBadge(badge1);
 
-            Assert.Throws<Exception>(() => _survivor.EquipBadge(badge2));
+            Assert.Throws<ArgumentException>(() => _survivor.EquipBadge(badge2));
         }
     }
 }

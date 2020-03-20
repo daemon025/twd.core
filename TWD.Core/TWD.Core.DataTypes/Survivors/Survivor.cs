@@ -53,8 +53,9 @@ namespace TWD.Core.DataTypes.Survivors
         {
             Ensure.Any.IsNotNull(badge, nameof(badge));
             Ensure.Comparable.IsInRange(badge.Slot, 1, 6, nameof(badge.Slot));
-            Ensure.Bool.IsTrue(Badges[badge.Slot] == null, nameof(badge.Slot), 
-                options => options.WithMessage("Can not equip badge on non free slot. Unequip the old one first."));
+            Ensure.Bool.IsTrue(Badges[badge.Slot - 1] == null, nameof(badge.Slot),
+                options => options.WithMessage("Can not equip badge on non free slot. Remove the old one first."));
+            Ensure.Bool.IsTrue(Badges.Count(x => x != null && x.Effect == badge.Effect) < 3, null, opts => opts.WithMessage("Can not add more than 3 badges of the same effect."));
 
             Badges[badge.Slot - 1] = badge;
         }
