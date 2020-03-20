@@ -49,18 +49,27 @@ namespace TWD.Core.DataTypes.Survivors
         }
 
 
-        public void EquipBadge(int slot, Badge badge)
+        public void EquipBadge(Badge badge)
         {
-            Ensure.Comparable.IsInRange(slot, 1, 6, nameof(slot));
             Ensure.Any.IsNotNull(badge, nameof(badge));
+            Ensure.Comparable.IsInRange(badge.Slot, 1, 6, nameof(badge.Slot));
+            Ensure.Bool.IsTrue(Badges[badge.Slot] == null, nameof(badge.Slot), 
+                options => options.WithMessage("Can not equip badge on non free slot. Unequip the old one first."));
 
-            Badges[slot] = badge;
+            Badges[badge.Slot - 1] = badge;
         }
 
         public void UnEquipBadge(int slot)
         {
             Ensure.Comparable.IsInRange(slot, 1, 6, nameof(slot));
             Badges[slot] = null;
+        }
+
+        public IEnumerable<int> GetAvailableBadgeSlots()
+        {
+            for (var i = 0; i < 6; i++)
+                if (Badges[i] == null)
+                    yield return i + 1;
         }
     }
 }
