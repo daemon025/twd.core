@@ -20,10 +20,10 @@ namespace TWD.Core.DataTypes.Tests
         [Test]
         public void Should_Not_Allow_To_Add_4_Or_More_With_The_Same_Effect()
         {
-            var badge1 = new Badge(Guid.NewGuid(), BadgeRarity.Rare, BadgeSet.A, BadgeEffect.CriticalChance, 1, new NoCondition());
-            var badge2 = new Badge(Guid.NewGuid(), BadgeRarity.Rare, BadgeSet.A, BadgeEffect.CriticalChance, 2, new NoCondition());
-            var badge3 = new Badge(Guid.NewGuid(), BadgeRarity.Rare, BadgeSet.A, BadgeEffect.CriticalChance, 3, new NoCondition());
-            var badge4 = new Badge(Guid.NewGuid(), BadgeRarity.Rare, BadgeSet.A, BadgeEffect.CriticalChance, 4, new NoCondition());
+            var badge1 = new Badge(Guid.NewGuid(), BadgeRarity.Rare, BadgeSet.A, BadgeEffect.CriticalChance, BadgeSlot.Slot1, new NoCondition());
+            var badge2 = new Badge(Guid.NewGuid(), BadgeRarity.Rare, BadgeSet.A, BadgeEffect.CriticalChance, BadgeSlot.Slot2, new NoCondition());
+            var badge3 = new Badge(Guid.NewGuid(), BadgeRarity.Rare, BadgeSet.A, BadgeEffect.CriticalChance, BadgeSlot.Slot3, new NoCondition());
+            var badge4 = new Badge(Guid.NewGuid(), BadgeRarity.Rare, BadgeSet.A, BadgeEffect.CriticalChance, BadgeSlot.Slot4, new NoCondition());
 
             _survivor.EquipBadge(badge1);
             _survivor.EquipBadge(badge2);
@@ -35,8 +35,8 @@ namespace TWD.Core.DataTypes.Tests
         [Test]
         public void Should_Not_Allow_To_Equip_On_Not_Free_Slot()
         {
-            var badge1 = new Badge(Guid.NewGuid(), BadgeRarity.Rare, BadgeSet.A, BadgeEffect.CriticalChance, 1, new NoCondition());
-            var badge2 = new Badge(Guid.NewGuid(), BadgeRarity.Rare, BadgeSet.A, BadgeEffect.CriticalChance, 1, new NoCondition());
+            var badge1 = new Badge(Guid.NewGuid(), BadgeRarity.Rare, BadgeSet.A, BadgeEffect.CriticalChance, BadgeSlot.Slot1, new NoCondition());
+            var badge2 = new Badge(Guid.NewGuid(), BadgeRarity.Rare, BadgeSet.A, BadgeEffect.CriticalChance, BadgeSlot.Slot1, new NoCondition());
 
             _survivor.EquipBadge(badge1);
 
