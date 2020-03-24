@@ -7,12 +7,12 @@ namespace TWD.Core.DataTypes.Survivors
     {
         public SurvivorTrait(Trait trait, int level)
         {
-            Trait = Ensure.Any.IsNotNull(trait,nameof(trait));
+            Trait = Ensure.Any.IsNotNull(trait, nameof(trait));
             Level = Ensure.Comparable.IsInRange(level, 1, SurvivorConstants.MaxTraitLevel, nameof(level));
         }
 
         public Trait Trait { get; }
-        public int Level { get;  }
+        public int Level { get; }
 
         public string Description => Trait.GetDescription(Level);
     }

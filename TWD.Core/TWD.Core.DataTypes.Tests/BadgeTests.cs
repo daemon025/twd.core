@@ -1,8 +1,10 @@
 ﻿using System;
+using System.Collections.Generic;
 using NUnit.Framework;
 using TWD.Core.DataTypes.Badges;
 using TWD.Core.DataTypes.Badges.Conditions;
 using TWD.Core.DataTypes.Survivors;
+using TWD.Core.DataTypes.Survivors.Traits.Common;
 
 namespace TWD.Core.DataTypes.Tests
 {
@@ -14,7 +16,14 @@ namespace TWD.Core.DataTypes.Tests
         [SetUp]
         public void SetUp()
         {
-            _survivor = new Survivor("Test", SurvivorClass.Assault, 10, SurvivorRarity.Rare);
+            var traits = new List<SurvivorTrait>
+            {
+                new SurvivorTrait(new MarksmanTrait(), 3),
+                new SurvivorTrait(new LuckyTrait(), 3),
+                new SurvivorTrait(new IronSkinTrait(), 3)
+            };
+
+            _survivor = new Survivor("Test", SurvivorClass.Assault, 10, SurvivorRarity.Rare, traits.ToArray());
         }
 
         [Test]

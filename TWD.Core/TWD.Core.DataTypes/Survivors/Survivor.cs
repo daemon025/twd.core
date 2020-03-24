@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using EnsureThat;
 using TWD.Core.DataTypes.Badges;
@@ -9,15 +10,21 @@ namespace TWD.Core.DataTypes.Survivors
 {
     public class Survivor
     {
-        public Survivor(string name, SurvivorClass @class, int level, SurvivorRarity rarity)
+        private readonly BadgeContainer _badgeContainer;
+
+        public Survivor(string name, SurvivorClass @class, int level, SurvivorRarity rarity, SurvivorTrait[] traits)
         {
             Id = Guid.NewGuid();
             Name = Ensure.String.IsNotNullOrWhiteSpace(name, nameof(name));
             Class = Ensure.Any.IsNotNull(@class, nameof(@class));
             Level = Ensure.Comparable.IsInRange(level, 1, SurvivorConstants.MaxLevel, nameof(level));
             Rarity = rarity;
+
             _traits = new List<SurvivorTrait>();
-            Badges = new Badge[6];
+            foreach (var survivorTrait in Ensure.Collection.HasItems(traits, nameof(traits)))
+                AddTrait(survivorTrait);
+
+            _badgeContainer = new BadgeContainer();
         }
 
         public Guid Id { get; }
@@ -29,46 +36,31 @@ namespace TWD.Core.DataTypes.Survivors
         private readonly List<SurvivorTrait> _traits;
         public IReadOnlyList<SurvivorTrait> Traits => _traits.AsReadOnly();
 
-        public Badge[] Badges { get; }
-
-        public Survivor AddTrait<T>(int level) where T : Trait, new()
-        {
-            var trait = new T();
-
-            Ensure.Bool.IsTrue(trait.BelongsToClass(Class.Id), null,
-                options => options.WithMessage($"{trait.Name} doesn't belong to {Class.Name}!"));
-            Ensure.Bool.IsFalse(_traits.Any(x => x.Trait.Id == trait.Id), null,
-                options => options.WithMessage("Traits must be unique"));
-            Ensure.Comparable.IsLt(_traits.Count, (int)Rarity, null,
-                options => options.WithMessage("Can't add more traits, maximum capacity reached."));
-            Ensure.Comparable.IsInRange(level, (int)Rarity - 1, (int)Rarity, nameof(level));
-
-            _traits.Add(new SurvivorTrait(trait, level));
-
-            return this;
-        }
-
+        public ReadOnlyCollection<Badge> Badges => _badgeContainer.Badges;
 
         public void EquipBadge(Badge badge)
         {
-            Ensure.Any.IsNotNull(badge, nameof(badge));
-            Ensure.Bool.IsTrue(Badges[(int)badge.Slot] == null, nameof(badge.Slot),
-                options => options.WithMessage("Can not equip badge on non free slot. Remove the old one first."));
-            Ensure.Bool.IsTrue(Badges.Count(x => x != null && x.Effect == badge.Effect) < 3, null, opts => opts.WithMessage("Can not add more than 3 badges of the same effect."));
-
-            Badges[(int)badge.Slot] = badge;
+            _badgeContainer.EquipBadge(badge);
         }
 
         public void UnEquipBadge(BadgeSlot slot)
         {
-            Badges[(int)slot] = null;
+            _badgeContainer.UnEquipBadge(slot);
         }
 
-        public IEnumerable<BadgeSlot> GetAvailableBadgeSlots()
+        private void AddTrait(SurvivorTrait survivorTrait)
         {
-            for (var i = 0; i < 6; i++)
-                if (Badges[i] == null)
-                    yield return (BadgeSlot)i;
+            Ensure.Any.IsNotNull(survivorTrait, nameof(survivorTrait));
+
+            Ensure.Bool.IsTrue(survivorTrait.Trait.BelongsToClass(Class.Id), null,
+                options => options.WithMessage($"{survivorTrait.Trait.Name} doesn't belong to {Class.Name}!"));
+            Ensure.Bool.IsFalse(_traits.Any(x => x.Trait.Id == survivorTrait.Trait.Id), null,
+                options => options.WithMessage("Traits must be unique"));
+            Ensure.Comparable.IsLt(_traits.Count, (int)Rarity, null,
+                options => options.WithMessage("Can't add more traits, maximum capacity reached."));
+            Ensure.Comparable.IsInRange(survivorTrait.Level, (int)Rarity - 1, (int)Rarity, nameof(survivorTrait.Level));
+
+            _traits.Add(survivorTrait);
         }
     }
 }
