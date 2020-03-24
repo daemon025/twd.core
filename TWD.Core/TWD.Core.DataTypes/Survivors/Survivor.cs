@@ -1,13 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using EnsureThat;
+using TWD.Core.DataTypes.Badges;
 using TWD.Core.DataTypes.Constants;
 
 namespace TWD.Core.DataTypes.Survivors
 {
     public class Survivor
     {
+        private readonly BadgeContainer _badgeContainer;
+
         public Survivor(string name, SurvivorClass @class, int level, SurvivorRarity rarity, SurvivorTrait[] traits)
         {
             Id = Guid.NewGuid();
@@ -15,10 +19,12 @@ namespace TWD.Core.DataTypes.Survivors
             Class = Ensure.Any.IsNotNull(@class, nameof(@class));
             Level = Ensure.Comparable.IsInRange(level, 1, SurvivorConstants.MaxLevel, nameof(level));
             Rarity = rarity;
-            _traits = new List<SurvivorTrait>();
 
+            _traits = new List<SurvivorTrait>();
             foreach (var survivorTrait in Ensure.Collection.HasItems(traits, nameof(traits)))
                 AddTrait(survivorTrait);
+
+            _badgeContainer = new BadgeContainer();
         }
 
         public Guid Id { get; }
@@ -29,6 +35,18 @@ namespace TWD.Core.DataTypes.Survivors
 
         private readonly List<SurvivorTrait> _traits;
         public IReadOnlyList<SurvivorTrait> Traits => _traits.AsReadOnly();
+
+        public ReadOnlyCollection<Badge> Badges => _badgeContainer.Badges;
+
+        public void EquipBadge(Badge badge)
+        {
+            _badgeContainer.EquipBadge(badge);
+        }
+
+        public void UnEquipBadge(BadgeSlot slot)
+        {
+            _badgeContainer.UnEquipBadge(slot);
+        }
 
         private void AddTrait(SurvivorTrait survivorTrait)
         {
